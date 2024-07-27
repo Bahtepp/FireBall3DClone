@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class MovingBlocks : MonoBehaviour
 {
@@ -32,5 +34,8 @@ public class MovingBlocks : MonoBehaviour
                 movingForward = true;
             }
         }
+    }
+    void OnTriggerEnter (Collider other){
+        Destroy(other.gameObject);
     }
 }
