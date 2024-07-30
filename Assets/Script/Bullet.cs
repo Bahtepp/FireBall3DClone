@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float BulletSpeed = 5.0f;
+   
+    public bool walk = false;
+    
+    private float BulletSpeed = 7.0f;
     private float xBound = 3.0f;
     
     // Start is called before the first frame update
@@ -27,6 +31,7 @@ public class Bullet : MonoBehaviour
         if(other.CompareTag("towerblock")){
         Destroy(gameObject);
         Destroy(other.gameObject);
+       
         }}
         
 }
