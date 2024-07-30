@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,61 +8,48 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour
 {
     
-    public GameObject[] Deleted;
-    public GameObject[] towerblocks;
-    public bool walk = false;
-    
-    private int towerBlockCount = 0;
-    public int howMuchBlockDestroy = 0;
+
+     public bool walk = false;
+     public bool isActive = true;
+
+     public int howMuchBlockDestroy = 0;
  
-   private List<GameObject> towerBlocks;
-  Vector3 spawnPos = new Vector3 (0,25,0); 
+     public List<GameObject> towerBlocks;
+     public GameObject towerBlock;
+    
+     public GameObject parentObject;
+     
+     Vector3 spawnPos = new Vector3 (0,25,0); 
+ 
     
     // Start is called before the first frame update
      void Start()
-     
     {
-      
-       
+     TowerBlockCreator(); 
     }
 
     // Update is called once per frame
     void Update()
-    {
-          towerBlocks = new List<GameObject>(GameObject.FindGameObjectsWithTag("towerblock"));
-      towerBlockCount = towerBlocks.Count;
-    
-        TowerBlockCreator();
-        LevelChanger();
-        DeleteEveryone();
-       
-        
+    {  
+        LevelChanger(); 
     }
    
         void TowerBlockCreator (){
-       
-        if(howMuchBlockDestroy <= 24){
-                 if (towerBlockCount < 5 ){
-        int towerindex = Random.Range(0,2);
-        Instantiate(towerblocks[towerindex],spawnPos,towerblocks[towerindex].transform.rotation);
-        howMuchBlockDestroy++;
-        Debug.Log(howMuchBlockDestroy);
-       
-        }
-       }
-        }
-        void LevelChanger (){
-            if(howMuchBlockDestroy == 10){
-                walk = true;
+            
+            for(int i = 0;i <=25; i++){
+                Instantiate(towerBlock,spawnPos,transform.rotation,parentObject.transform);
+                towerBlocks.Add(towerBlock);
             }
         }
-       void DeleteEveryone (){
-        if(walk == true){
-            Destroy(Deleted[0]);
-            Destroy(Deleted[1]);
-            
-        }
-       }
-      
+
+  
+
+    void LevelChanger (){
+            if(howMuchBlockDestroy == 25){
+                walk = true;
+                isActive = false; 
+                
+            }
+        }  
     }
 

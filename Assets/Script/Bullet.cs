@@ -8,14 +8,15 @@ public class Bullet : MonoBehaviour
    
     
     public TowerManager walkBool;
-    
+    public TowerManager destroyList;
     private float BulletSpeed = 7.0f;
     private float xBound = 3.0f;
     
     // Start is called before the first frame update
     void Start()
     {
-       walkBool = GameObject.Find("TowerManager").GetComponent<TowerManager>();
+        destroyList = GameObject.Find("TowerMmanager").GetComponent<TowerManager>();
+     walkBool = GameObject.Find("TowerMmanager").GetComponent<TowerManager>();
     }
 
     // Update is called once per frame
@@ -27,15 +28,21 @@ public class Bullet : MonoBehaviour
      void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("towerblock")){
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+            Destroy(other.gameObject);
+            gameObject.SetActive(false);
+            Destroy(gameObject,0.2f);
+            destroyList.towerBlocks.RemoveAt(0);
+            destroyList.howMuchBlockDestroy++;
+            Debug.Log(destroyList.howMuchBlockDestroy);
        
         }
     }
     void BulletMovement(){
         transform.Translate(Vector3.right * BulletSpeed * Time.deltaTime);
+        if (transform.position.x == xBound){
+            Destroy(gameObject);
         if(!walkBool.walk){
-            if (transform.position.x>xBound){
+            if (transform.position.x > xBound)
             Destroy(gameObject);
             }
             

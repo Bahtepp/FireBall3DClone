@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        walkBool = GameObject.Find("TowerManager").GetComponent<TowerManager>();
+        walkBool = GameObject.Find("TowerMmanager").GetComponent<TowerManager>();
       
     }
 

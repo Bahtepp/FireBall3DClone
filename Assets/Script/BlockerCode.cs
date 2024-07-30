@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 
 public class MovingBlocks : MonoBehaviour
 {
@@ -8,16 +9,19 @@ public class MovingBlocks : MonoBehaviour
     public float distance = 10.0f; // Hareket aralığı
     private Vector3 startPos;
     private bool movingForward = true;
+    
+    public TowerManager deleteBool;
 
     void Start()
     {
-    
+        deleteBool = GameObject.Find("TowerMmanager").GetComponent<TowerManager>();
         startPos = transform.position;
     }
 
     void Update()
     {
        BlockerMovement();
+       DeleteMySelf();
        
     }
     void OnTriggerEnter (Collider other){
@@ -39,6 +43,13 @@ public class MovingBlocks : MonoBehaviour
             {
                 movingForward = true;
             }
+        }
+    }
+    void DeleteMySelf(){
+        if(!deleteBool.isActive){
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+           
         }
     }
 }
