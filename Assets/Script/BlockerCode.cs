@@ -11,17 +11,23 @@ public class MovingBlocks : MonoBehaviour
 
     void Start()
     {
-        // Başlangıç pozisyonunu kaydet
+    
         startPos = transform.position;
     }
 
     void Update()
     {
-        // Bloğu ileri ve geri hareket ettir
-        if (movingForward)
+       BlockerMovement();
+       
+    }
+    void OnTriggerEnter (Collider other){
+        Destroy(other.gameObject);
+    }
+    void BlockerMovement(){
+         if (movingForward)
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            if (Vector3.Distance(startPos, transform.position) >= distance)
+            if (Vector3.Distance(startPos, transform.position) >= 0.1f + distance)
             {
                 movingForward = false;
             }
@@ -29,13 +35,10 @@ public class MovingBlocks : MonoBehaviour
         else
         {
             transform.Translate(Vector3.back * speed * Time.deltaTime);
-            if (Vector3.Distance(startPos, transform.position) >= distance)
+            if (Vector3.Distance(startPos, transform.position) >= 0.1f + distance)
             {
                 movingForward = true;
             }
         }
-    }
-    void OnTriggerEnter (Collider other){
-        Destroy(other.gameObject);
     }
 }

@@ -6,7 +6,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
    
-    public bool walk = false;
+    
+    public TowerManager walkBool;
     
     private float BulletSpeed = 7.0f;
     private float xBound = 3.0f;
@@ -14,16 +15,13 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+       walkBool = GameObject.Find("TowerManager").GetComponent<TowerManager>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (transform.position.x>xBound){
-            Destroy(gameObject);
-        }
-        transform.Translate(Vector3.right * BulletSpeed * Time.deltaTime) ;
+    { 
+        BulletMovement();
     }
 
      void OnTriggerEnter(Collider other)
@@ -32,6 +30,17 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
         Destroy(other.gameObject);
        
-        }}
+        }
+    }
+    void BulletMovement(){
+        transform.Translate(Vector3.right * BulletSpeed * Time.deltaTime);
+        if(!walkBool.walk){
+            if (transform.position.x>xBound){
+            Destroy(gameObject);
+            }
+            
+        }
+        
+    }
         
 }

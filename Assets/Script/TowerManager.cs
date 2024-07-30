@@ -8,8 +8,9 @@ public class TowerManager : MonoBehaviour
 {
     
     public GameObject[] Deleted;
-    public bool walk = false;
     public GameObject[] towerblocks;
+    public bool walk = false;
+    
     private int towerBlockCount = 0;
     public int howMuchBlockDestroy = 0;
  
@@ -50,7 +51,7 @@ public class TowerManager : MonoBehaviour
        }
         }
         void LevelChanger (){
-            if(howMuchBlockDestroy == 25){
+            if(howMuchBlockDestroy == 10){
                 walk = true;
             }
         }

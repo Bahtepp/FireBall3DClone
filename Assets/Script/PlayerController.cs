@@ -14,25 +14,34 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         walkBool = GameObject.Find("TowerManager").GetComponent<TowerManager>();
+      
     }
 
     // Update is called once per frame
     void Update()
     {   
 
-        if (Input.GetKeyDown(KeyCode.Space)){
-        Instantiate(bullet,spawnPos,bullet.transform.rotation);
-        }
-       MoveForward();
+        BulletCreate();
+        MoveForward();
     }
-     void MoveForward (){
-        if(walkBool.walk == true){
+        void MoveForward (){
+        if(walkBool.walk){
             if(Input.GetKey(KeyCode.W)){
                 transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
 
-            }
+                     }
+                }
         }
-       }
+        void BulletCreate (){
+            if(!walkBool.walk){
+                 if (Input.GetKeyDown(KeyCode.Space)){
+                 Vector3 spawnPoss = new Vector3(transform.position.x + 1.5f,transform.position.y,transform.position.z);
+                Instantiate(bullet,spawnPoss,transform.rotation);
+             }
+            }
+           
+        }
+
 }
     
 
