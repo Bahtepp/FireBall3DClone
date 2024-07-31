@@ -12,19 +12,28 @@ public class TowerManager : MonoBehaviour
      public bool walk = false;
      public bool isActive = true;
 
+    public bool setTower = false;
      public int howMuchBlockDestroy = 0;
+     private int towerBlockNumber = 10;
  
      public List<GameObject> towerBlocks;
      public GameObject towerBlock;
     
      public GameObject parentObject;
      
-     Vector3 spawnPos = new Vector3 (0,25,0); 
+     public float xCordinate = 0;
+     public float yCordinate = 25;
+     public float zCordinate = 0;
+
+     Vector3 spawnPos ;
+     
+     
  
     
     // Start is called before the first frame update
      void Start()
     {
+         
      TowerBlockCreator(); 
     }
 
@@ -32,24 +41,49 @@ public class TowerManager : MonoBehaviour
     void Update()
     {  
         LevelChanger(); 
+        SetLevelTwo();
     }
+     void DefaultBlock(){
+            Vector3 spawnPos = new Vector3 (xCordinate,yCordinate,zCordinate);
+            Debug.Log(spawnPos + "level 2 icin");
+            var blockRenderer = towerBlock.GetComponent<Renderer>();
+                   blockRenderer.sharedMaterial.SetColor("_Color", Color.magenta);
+            Instantiate(towerBlock,spawnPos,transform.rotation,parentObject.transform);
+        } 
+  
    
         void TowerBlockCreator (){
             
-            for(int i = 0;i <=25; i++){
-                Instantiate(towerBlock,spawnPos,transform.rotation,parentObject.transform);
+            for(int i = 0;i <=towerBlockNumber; i++){
+                   DefaultBlock();
                 towerBlocks.Add(towerBlock);
+                
+                  
+                
             }
         }
 
   
 
     void LevelChanger (){
-            if(howMuchBlockDestroy == 25){
+            if(howMuchBlockDestroy == towerBlockNumber){
                 walk = true;
                 isActive = false; 
-                
-            }
-        }  
+                towerBlockNumber += 5;
+                Destroy(GameObject.FindWithTag("towerblock"));
+                 }
+        } 
+       void SetLevelTwo (){
+        if(setTower){
+            xCordinate = 60;
+            yCordinate = 25;
+            zCordinate = 0;
+            spawnPos = new Vector3(xCordinate,yCordinate,zCordinate);
+            TowerBlockCreator();
+            setTower = false;
+            Debug.Log(spawnPos + "setleveldaki");
+        }
+       }
+       
     }
 

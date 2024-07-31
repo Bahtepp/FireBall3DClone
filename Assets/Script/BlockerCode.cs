@@ -22,6 +22,7 @@ public class MovingBlocks : MonoBehaviour
     {
        BlockerMovement();
        DeleteMySelf();
+       CreateMySelf();
        
     }
     void OnTriggerEnter (Collider other){
@@ -50,6 +51,13 @@ public class MovingBlocks : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(gameObject);
            
+        }
+    }
+    void CreateMySelf(){
+        if(deleteBool.setTower){
+            
+            gameObject.transform.position = new Vector3 (49,1.18f,0);
+
         }
     }
 }

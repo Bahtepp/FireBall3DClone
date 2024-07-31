@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private int moveSpeed = 5;
+    private int moveSpeed = 10;
     public TowerManager walkBool;
     private Vector3 spawnPos = new Vector3(-19,1,0);
     public GameObject bullet; 
+    public bool AmIHere = false;
+    
     
     
     // Start is called before the first frame update
@@ -20,7 +22,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-
+        TruePosition();
         BulletCreate();
         MoveForward();
     }
@@ -41,6 +43,12 @@ public class PlayerController : MonoBehaviour
             }
            
         }
+        void TruePosition(){
+    if(gameObject.transform.position.x >= 40){
+        AmIHere = true;
+        walkBool.walk = false;
+     }
+    }
 
 }
     
