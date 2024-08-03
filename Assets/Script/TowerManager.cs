@@ -68,19 +68,22 @@ public class TowerManager : MonoBehaviour
     void LevelChanger (){
             if(howMuchBlockDestroy == towerBlockNumber){
                 walk = true;
-                isActive = false; 
                 towerBlockNumber += 5;
-                Destroy(GameObject.FindWithTag("towerblock"));
+                isActive = false; 
+                
+                
                  }
-        } 
+        }   
+        //level 2 yapmıyo sınırsız üretiyo
        void SetLevelTwo (){
         if(setTower){
+            setTower = false;
             xCordinate = 60;
             yCordinate = 25;
             zCordinate = 0;
             spawnPos = new Vector3(xCordinate,yCordinate,zCordinate);
             TowerBlockCreator();
-            setTower = false;
+            
             Debug.Log(spawnPos + "setleveldaki");
         }
        }

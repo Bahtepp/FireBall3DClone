@@ -169,10 +169,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walk: 0
   isActive: 1
+  setTower: 0
   howMuchBlockDestroy: 0
   towerBlocks: []
   towerBlock: {fileID: 2667508198370200549, guid: 34cf3d2e5b88bc44a97b909160972b68, type: 3}
   parentObject: {fileID: 31368037}
+  xCordinate: 0
+  yCordinate: 25
+  zCordinate: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerManagers:
   - {fileID: 31368037}
-  changeActive: {fileID: 0}
+  towerManager: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!4 &834182524
 Transform:
   m_ObjectHideFlags: 0
@@ -782,6 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkBool: {fileID: 0}
   bullet: {fileID: 5320968789091462634, guid: acc8dab5409a6c44183de7cdc5f322eb, type: 3}
+  AmIHere: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
