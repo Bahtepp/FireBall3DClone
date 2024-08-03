@@ -5,30 +5,35 @@ using System.Dynamic;
 
 public class MovingBlocks : MonoBehaviour
 {
-    public float speed = 3.0f; // Hız
+    public float speed = 0; // Hız
     public float distance = 10.0f; // Hareket aralığı
     private Vector3 startPos;
     private bool movingForward = true;
     
-    public TowerManager deleteBool;
+   
 
     void Start()
     {
-        deleteBool = GameObject.Find("TowerMmanager").GetComponent<TowerManager>();
+        speed = Random.Range(3,10);
         startPos = transform.position;
     }
 
     void Update()
     {
        BlockerMovement();
-       DeleteMySelf();
-       CreateMySelf();
        
+
     }
-    void OnTriggerEnter (Collider other){
-        Destroy(other.gameObject);
+    void OnTriggerEnter (Collider other)
+    {
+        if(other.gameObject.CompareTag("bullet"))
+        {
+            Destroy(other.gameObject);
+        }
+        
     }
-    void BlockerMovement(){
+    void BlockerMovement()
+    {
          if (movingForward)
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
@@ -46,18 +51,6 @@ public class MovingBlocks : MonoBehaviour
             }
         }
     }
-    void DeleteMySelf(){
-        if(!deleteBool.isActive){
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-           
-        }
-    }
-    void CreateMySelf(){
-        if(deleteBool.setTower){
-            
-            gameObject.transform.position = new Vector3 (49,1.18f,0);
-
-        }
-    }
+    
+    
 }
